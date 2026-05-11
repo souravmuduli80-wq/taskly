@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Taskly – Task Reminder App</title>
+<link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div id="notif-bar" class="notif-bar"></div>
+<div class="app">
+  <div class="header">
+    <div class="logo">
+      <div class="logo-icon"><i class="ti ti-checkbox" aria-hidden="true"></i></div>
+      <h1>Taskly</h1>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <div id="overdue-indicator" style="display:none;align-items:center;gap:6px;font-size:12px;color:#f07060">
+        <div class="pulse-dot"></div><span id="overdue-count">0 overdue</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-num" id="stat-total">0</div><div class="stat-label">Total</div></div>
+    <div class="stat"><div class="stat-num" id="stat-pending" style="color:#e8a320">0</div><div class="stat-label">Pending</div></div>
+    <div class="stat"><div class="stat-num" id="stat-done" style="color:#4caf7d">0</div><div class="stat-label">Done</div></div>
+  </div>
+
+  <div id="notif-perm-bar" class="notif-perm" style="display:none">
+    <i class="ti ti-bell" style="color:var(--amber);font-size:18px" aria-hidden="true"></i>
+    <span>Enable browser notifications to get reminded even when the tab is in the background.</span>
+    <button class="btn btn-sm" onclick="requestNotifPerm()" style="background:var(--amber-dim);border:0.5px solid var(--amber);color:var(--amber);margin-left:auto;white-space:nowrap">Enable</button>
+  </div>
+
+  <div class="add-form">
+    <div class="form-title"><i class="ti ti-plus" aria-hidden="true"></i> Add new task</div>
+    <div class="form-row full"><input type="text" id="inp-title" placeholder="What needs to be done?" /></div>
+    <div class="form-row full"><textarea id="inp-desc" placeholder="Notes (optional)"></textarea></div>
+    <div class="form-row">
+      <input type="datetime-local" id="inp-due" />
+      <select id="inp-priority">
+        <option value="medium">Medium priority</option>
+        <option value="high">High priority</option>
+        <option value="low">Low priority</option>
+      </select>
+    </div>
+    <button class="btn btn-primary" onclick="addTask()"><i class="ti ti-plus" aria-hidden="true"></i> Add Task</button>
+  </div>
+
+  <div class="section-header">
+    <span class="section-label">Your tasks</span>
+    <div class="filter-row" style="margin-bottom:0">
+      <button class="filter-btn active" onclick="setFilter('all',this)">All</button>
+      <button class="filter-btn" onclick="setFilter('pending',this)">Pending</button>
+      <button class="filter-btn" onclick="setFilter('done',this)">Done</button>
+      <button class="filter-btn" onclick="setFilter('overdue',this)">Overdue</button>
+    </div>
+  </div>
+
+  <div id="task-list" class="tasks"></div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
